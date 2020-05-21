@@ -35,6 +35,7 @@ class UsersController extends Controller
                 session()->flash('fail', 'E-mail / Password Salah !');
             }
         } catch (\Exception $e) {
+            dd($e);
             session()->flash('error', 'Terjadi Kesalahan ! Coba Lagi Dalam Beberapa Saat !');
             return redirect()->back();
         }

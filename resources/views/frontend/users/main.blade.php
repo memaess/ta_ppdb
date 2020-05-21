@@ -5,18 +5,21 @@
 @endsection
 
 @section('content-header')
-   <div class="container">
-       @if (session('success'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h1>Lanjutkan Upload Berkas</h1>
-                <hr>
-                <p><a href="">Klik Disini</a> {{ session('success') }}</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-       @endif
-   </div>
+<div class="container">
+    @if (session('success'))
+        <div class="callout callout-info">
+            <h5><i class="fas fa-info"></i> Note:</h5>
+            {{ session('success') }} <a href="">Klik Disini</a>
+        </div>
+    @endif
+
+    @if (session('danger'))
+        <div class="callout callout-info">
+            <h5><i class="fas fa-info"></i> Note:</h5>
+            {{ session('danger') }}
+        </div>
+    @endif
+</div>
 @endsection
 
 @section('content')

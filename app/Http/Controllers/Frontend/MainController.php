@@ -11,15 +11,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        try {
-            $siswa = Siswa::where('id', '=', $user->id)->firstOrFail();
-            session()->flash('success', 'Untuk Melanjutkan Pendaftaran Dengan Upload Berkas !');
-
-        } catch (\Exception $e) {
-            session()->flash('error', 'Terjadi Kesalahan ! Silahkan Ulangi Kembali Beberapa Saat !');
-        }
-
         $check = Auth::check();
         if ($check) {
             $user = Auth::user();
@@ -28,6 +19,12 @@ class MainController extends Controller
                 return redirect('/login');
             } else {
                 $user = Auth::user();
+                try {
+                    $siswa = Siswa::where('user_id', '=', $user->id)->firstOrFail();
+                    session()->flash('success', 'Lanjut Upload Berkas Untuk Memenuhi Persyaratan Pedaftaran');
+                } catch (\Exception $e) {
+                    session()->flash('danger', 'Anda Sudah Upload Berkas Silahkan Tunggu Notifikasi Di E-Mail Anda');
+                }
                 return view('frontend.users.main', compact('user'));
             }
         } else {
@@ -35,4 +32,5 @@ class MainController extends Controller
             return redirect('/login');
         }
     }
+    
 }
