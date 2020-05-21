@@ -138,10 +138,13 @@
                         <br>
 
                         <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link">
-                                <i class="nav-icon fas fa-fw fa-power-off"></i>
-                                <p>Logout</p>
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fas fa-fw fa-sign-out-alt"></i>
+                                <span>Logout</span>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </nav>
@@ -182,8 +185,28 @@
     </div>
     <!-- ./wrapper -->
 
+    <!-- jQuery -->
+    <script src="{{ asset('') }}plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('') }}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('') }}dist/js/adminlte.min.js"></script>
+
     <!-- REQUIRED SCRIPTS -->
     <script>
+        $(function () {
+            $('#province').on('change', function () {
+                axios.post('{{ route('dependent-dropdown.store') }}', {id: $(this).val()})
+                .then(function (response) {
+                    $('#city').empty();
+
+                    $.each(response.data, function (id, name) {
+                        $('#city').append(new Option(name, id))
+                    })
+                });
+            });
+        });
+
         function clockTick()    {
             currentTime = new Date();
             year = currentTime.getFullYear();
@@ -191,11 +214,6 @@
         }
         setInterval(function(){clockTick();}, 1000);
     </script>
-    <!-- jQuery -->
-    <script src="{{ asset('') }}plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('') }}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('') }}dist/js/adminlte.min.js"></script>
+    
 </body>
 </html>

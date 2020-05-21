@@ -21,7 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'siswa'], function () {
         Route::group(['middleware' => ['role:Siswa']], function () {
             Route::get('/', 'Frontend\MainController@index')->name('siswa.index');
-
+            Route::resource('uploads', 'Frontend\BerkasController');
+            Route::post('dependent-dropdown', 'Frontend\BerkasControlle@city')->name('dependent-dropdown.store');
         });
     });
 });

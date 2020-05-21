@@ -6,19 +6,20 @@
 
 @section('content-header')
 <div class="container">
-    @if (session('success'))
+    {{-- @if (session('success')) --}}
         <div class="callout callout-info">
             <h5><i class="fas fa-info"></i> Note:</h5>
-            {{ session('success') }} <a href="">Klik Disini</a>
+            {{-- {{ session('success') }}  --}}
+            Lanjut Upload Berkas Untuk Memenuhi Persyaratan Pedaftaran <a href="{{ route('uploads.index') }}">Klik Disini</a>
         </div>
-    @endif
+    {{-- @endif --}}
 
-    @if (session('danger'))
+    {{-- @if (session('danger'))
         <div class="callout callout-info">
             <h5><i class="fas fa-info"></i> Note:</h5>
             {{ session('danger') }}
         </div>
-    @endif
+    @endif --}}
 </div>
 @endsection
 

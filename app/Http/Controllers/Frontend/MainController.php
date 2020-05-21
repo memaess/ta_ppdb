@@ -19,12 +19,12 @@ class MainController extends Controller
                 return redirect('/login');
             } else {
                 $user = Auth::user();
-                try {
-                    $siswa = Siswa::where('user_id', '=', $user->id)->firstOrFail();
-                    session()->flash('success', 'Lanjut Upload Berkas Untuk Memenuhi Persyaratan Pedaftaran');
-                } catch (\Exception $e) {
-                    session()->flash('danger', 'Anda Sudah Upload Berkas Silahkan Tunggu Notifikasi Di E-Mail Anda');
-                }
+                // try {
+                //     $siswa = Siswa::where('user_id', '=', $user->id)->firstOrFail();
+                //     session()->flash('success', 'Lanjut Upload Berkas Untuk Memenuhi Persyaratan Pedaftaran');
+                // } catch (\Exception $e) {
+                //     session()->flash('danger', 'Anda Sudah Upload Berkas Silahkan Tunggu Notifikasi Di E-Mail Anda');
+                // }
                 return view('frontend.users.main', compact('user'));
             }
         } else {
@@ -32,5 +32,4 @@ class MainController extends Controller
             return redirect('/login');
         }
     }
-    
 }
